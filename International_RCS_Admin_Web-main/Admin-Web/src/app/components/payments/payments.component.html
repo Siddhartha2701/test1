@@ -1,0 +1,199 @@
+<div class="shadow mt-4 p-4" style="border-radius: 15px;">
+    <div>
+        <table class="tbl w-100 " style="padding: 0; margin: 0;">
+            <thead class="text-center text-secondary">
+                <tr class="w-100">
+                    <th><button class="btn btn-lg  btn-outline-primary" data-toggle="modal" data-target="#myModal">Add
+                            Balance</button></th>
+                    <th class="srch">
+                        <div class="">
+                            <form class="form-inline " [formGroup]="searchFrm">
+                                <div class="form-group d-flex justify-content-center">
+                                    <label for="userName" style="font-size: 20px;"><strong>User Name : </strong></label>
+                                    <input type="text" name="UserName" formControlName="search"
+                                        class="fc1 form-control ml-2" placeholder="Please Enter User Name" id="userName"
+                                        [matAutocomplete]="auto" (input)="InputField(searchFrm.value)">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of options" [value]="option.user_name">
+                                            {{option.user_name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <div class="bbtn">
+                                        <button type="submit" class="btn ml-2 btn-sm btn-outline-info"
+                                            style="font-size: 20px;" (click)="getPayments()">Get
+                                            Payments</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </th>
+                    <th class="w-auto " style="font-size: 20px;"><strong>Previous Added Smart Credits:
+                        </strong>{{avalaibleCredits}}</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <br>
+    <div class="d-inline-flex table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="text-center bg-light" style="letter-spacing: 0.3mm;font-size: 20px;">
+                <tr>
+                    <th>User Name</th>
+                    <th>Is Reseller</th>
+                    <th>Description</th>
+                    <!-- <th>Smart</th> -->
+                    <th>Amount</th>
+                    <th>Purchase Date</th>
+                    <th>Sales Person Name</th>
+                    <!-- <th>Trans Credits</th>
+                    <th>Promo Credits</th>
+                    <th>Promo with SID Credits</th> -->
+                </tr>
+            </thead>
+            <tbody *ngIf="receivedDataType" style="font-size: large;font-weight: 500;">
+                <tr *ngFor="let i of receivedData">
+                    <td>{{i.uname}}</td>
+                    <td>{{i.IR}}</td>
+                    <td>{{i.pur_desc}}</td>
+                    <!-- <td>{{i.no_of_credits}}</td> -->
+                    <td>{{i.no_of_rcs_wallet}}</td>
+                    <td>{{i.purchase_timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{i.sales_name}}</td>
+                </tr>
+                <tr class="display-4 bg-light" style="font-size: larger; font-weight: bold;">
+                    <td></td>
+                    <td></td>
+                    <!-- <td>Total Credits</td> -->
+                    <!-- <td>
+                        <span class="d-flex align-items-center ">
+
+                            <span>{{totalCredits}}</span> <span class="material-symbols-outlined p-0 m-0 ml-1">
+                                electric_bolt
+                            </span>
+                        </span>
+                    </td> -->
+                    <td >Total Amount </td>
+                    <td colspan="3"><span class="pl-1 pr-1"
+                        style="font-weight: 900;">&#x20B9;</span>{{totalAmount | number}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!receivedDataType">
+                <tr>
+                    <td colspan="8" class="text-secondary" style="font-size: 20px;opacity: 0.6;">You Don't Have Payments
+                        List!</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <table class="table table-bordered table-sm" style="width: 60%;">
+            <thead class="text-center bg-success text-white" style="letter-spacing: 0.3mm;">
+                <tr>
+                    <th>Smart</th>
+                    <th>Mi</th>
+                    <th>Amount</th>
+                    <th>Purchase Date</th>
+                    <th>Sales Person Name</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="receivedDataType">
+                <tr *ngFor="let i of receivedData" class="text-center">
+                    <td></td>
+                    <td></td>
+                    <td>{{i.user_purchase_amt}}</td>
+                    <td>{{i.purchase_timestamp}}</td>
+                    <td>{{i.sales_name}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!receivedDataType">
+                <tr>
+                    <td colspan="5"></td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</div>
+
+<!-- Modal Section -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-light">
+
+            <!-- Modal Header -->
+            <div class="modal-header pb-0">
+                <p class="modal-title display-4" style="font-size: 25px;"><strong>ADD Balance</strong></p>
+                <button type="button" class="close" style="font-size: 50px;" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div>
+                    <form action="#" [formGroup]="add_BalFrm" (ngSubmit)="addBalance()">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <label for="userID" class="ml-2"><b>User Name<sup style="color: red;">*</sup>
+                                        :</b></label>
+                                <input type="text" name="User Name" class="form-control" formControlName="uname"
+                                    placeholder="Please Enter User Name" id="userID">
+                                <div
+                                    *ngIf="add_BalFrm.controls['uname'].invalid && (add_BalFrm.controls['uname'].dirty || add_BalFrm.controls['uname'].touched)">
+                                    <mat-error *ngIf="add_BalFrm.controls['uname'].hasError('required')">Please Provide
+                                        User Name</mat-error>
+                                    <mat-error *ngIf="add_BalFrm.controls['uname'].hasError('pattern')">
+                                        User Name Contains Only <strong>[a-zA-Z0-9_\-]+</strong> "NO Spaces".
+                                    </mat-error>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="credits" class="ml-2"><b>Credits<sup style="color: red;">*</sup>
+                                        :</b></label>
+                                <input type="number" name="Credits" class="form-control "
+                                    placeholder="Please Enter Credits" formControlName="credits" id="credits">
+                                <div
+                                    *ngIf="add_BalFrm.controls['credits'].invalid && (add_BalFrm.controls['credits'].dirty || add_BalFrm.controls['credits'].touched)">
+                                    <mat-error *ngIf="add_BalFrm.controls['credits'].hasError('required')">Please
+                                        Provide Credits.</mat-error>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="amount" class="ml-2"><b>Amount<sup style="color: red;">*</sup> :</b></label>
+                                <input type="number" name="Amount" class="form-control" formControlName="amt"
+                                    placeholder="Please Enter Amount" id="amount">
+                                <div
+                                    *ngIf="add_BalFrm.controls['amt'].invalid && (add_BalFrm.controls['amt'].dirty || add_BalFrm.controls['amt'].touched)">
+                                    <mat-error *ngIf="add_BalFrm.controls['amt'].hasError('required')">Please
+                                        Provide Amount&#x20B9;.</mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc"><b>Description<sup style="color: red;">*</sup> :</b></label>
+                            <textarea name="Description" placeholder="Please Enter Description" formControlName="pdesc"
+                                id="desc" class="form-control"></textarea>
+                            <div
+                                *ngIf="add_BalFrm.controls['pdesc'].invalid && (add_BalFrm.controls['pdesc'].dirty || add_BalFrm.controls['pdesc'].touched)">
+                                <mat-error *ngIf="add_BalFrm.controls['pdesc'].hasError('required')">Please
+                                    Provide Description.</mat-error>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="salespersonname"><b>Sales Person Name<sup style="color: red;">*</sup>
+                                    :</b></label>
+                            <select name="Sales Person Name" class="form-control w-25" formControlName="sname"
+                                id="salespersonname">
+                                <option value="raju" selected>Raju</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-outline-primary " [disabled]="!add_BalFrm.valid">Add
+                                Balance</button>
+                            <button type="button" id="cancel" class="btn btn-outline-secondary ml-2"
+                                data-dismiss="modal" (click)="close()">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

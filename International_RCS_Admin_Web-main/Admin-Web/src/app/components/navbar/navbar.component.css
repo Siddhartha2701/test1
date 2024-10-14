@@ -1,0 +1,13 @@
+.nav-link{
+    font-size: large;
+    font-weight: 600;
+    letter-spacing: 0.3mm;
+}
+.nav-item .nav-link{
+    cursor: pointer;
+}
+
+.dropdown-menu .dropdown-item{
+    font-size: 20px;
+    padding: 15px;
+}

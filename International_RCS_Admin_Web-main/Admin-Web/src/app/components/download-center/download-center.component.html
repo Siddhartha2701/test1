@@ -1,0 +1,34 @@
+<div>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card w-75" style="border-radius: 15px;">
+            <div class="card-header pb-0" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <p class="display-4" style="font-size: 35px;"><strong>Download Center<lucide-icon name="download" [size]="45" class="pb-1" [strokeWidth]="3"  [absoluteStrokeWidth]="true"></lucide-icon>
+                </strong></p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive-sm">
+
+                    <table class="table table-bordered table-hover text-center ">
+                        <thead class="bg-light" style="font-size: 20px;">
+                            <tr>
+                                <th>S.No</th>
+                                <th>File Name</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody  style="font-size: medium;font-weight: 500;">
+                            <tr style="font-size: larger;" *ngFor="let item of UserData;let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.file_path}}</td>
+                                <td *ngIf="item.done_status == 1"><a (click)="download(i)"><lucide-icon
+                                            style="cursor: pointer;" name="file-down" color="#00ff1e" [size]="30"
+                                            [strokeWidth]="2"></lucide-icon></a></td>
+                                <td *ngIf="item.done_status == 0">--Report Generating--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

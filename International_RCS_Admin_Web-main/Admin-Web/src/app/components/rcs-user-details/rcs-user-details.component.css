@@ -1,0 +1,76 @@
+.dtl {
+    /* background: linear-gradient(to left, #7be77d, #0fbbad81); */
+    border: 3px solid lightseagreen;
+    border-radius: 20px;
+    padding: 10px;
+    width: 50%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.frm {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+mat-error{
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.table tr td,.table tr th{
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.table tr td:nth-last-child(1),.table tr th:nth-last-child(1){
+    border-right:0;
+}
+
+.border{
+    border-radius: 15px;
+}
+
+mat-form-field mat-label {
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 0.3mm;
+    padding: 0 7px;
+}
+
+mat-form-field input {
+    color: white;
+}
+
+.modal-content{
+    border-radius: 20px;
+}
+mat-card mat-card-content{
+    background-color: transparent;
+
+}
+
+
+.button {
+    font-size: 1.2rem;
+    padding: 24px 20px;
+    border-radius: 10px;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .dtl {
+        /* background: linear-gradient(to left, #7be77d, #0fbbad81); */
+        border: 3px solid lightseagreen;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 10px;
+        width: 90%;
+    }
+}

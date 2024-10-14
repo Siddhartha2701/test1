@@ -1,0 +1,27 @@
+
+.example-full-width {
+    width: 100%;
+    /* height: auto; */
+
+}
+input[matInput]{
+    height: fit-content;
+    font-size: 20px;
+    /* width: 100; */
+}
+
+.paginator{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+th,td{
+    border-right: 1px solid lightgray;
+}
+.border{
+    border-radius: 15px;
+}
+
+mat-form-field mat-label ,mat-form-field mat-select {
+    font-size: 20px;
+}

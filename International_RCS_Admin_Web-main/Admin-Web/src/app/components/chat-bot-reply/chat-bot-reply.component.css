@@ -1,0 +1,15 @@
+.container {
+    min-height: 550px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ox{
+    overflow-x: scroll;
+}
+
+.ox::-webkit-scrollbar{
+    display: none;
+}

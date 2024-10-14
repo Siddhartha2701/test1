@@ -1,0 +1,225 @@
+<div class="mt-4 p-4 d-block shadow" style="border-radius: 15px;">
+    <!-- <div class="d-flex justify-content-around"> -->
+
+    <div class="row upperrow">
+        <div class="adbtn col-lg-2 col-md-4 col-sm-12 col-12 d-flex justify-content-center ">
+            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal"
+                style="font-size: 20px; letter-spacing: 0.3mm; padding: 0px 15px;"><strong>Add User</strong></button>
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content p-2">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header pb-0">
+                            <h1 class="modal-title" style="font-weight: 500;">Registration</h1>
+                            <button type="button" class="close" (click)="clear()" data-dismiss="modal">
+                                <lucide-icon name="x" [size]="32" [strokeWidth]="3"></lucide-icon>
+                            </button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="modall">
+                                <form [formGroup]="regFrm" (ngSubmit)="onRegister()">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="fname"><b>First Name<sup style="color: red;">*</sup>
+                                                    :</b></label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Please Enter First Name" name="First Name"
+                                                formControlName="fname" id="fname" required>
+                                            <div
+                                                *ngIf="regFrm.controls['fname'].invalid && (regFrm.controls['fname'].dirty || regFrm.controls['fname'].touched)">
+                                                <div style="color: red;"
+                                                    *ngIf="regFrm.controls['fname'].hasError('required')">
+                                                    Please Provide First Name.!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="lname"><b>Last Name<sup style="color: red;">*</sup>
+                                                    :</b></label>
+                                            <input type="text" class="form-control" placeholder="Please Enter Last Name"
+                                                name="Last Name" formControlName="lname" id="lname" required>
+                                            <div
+                                                *ngIf="regFrm.controls['lname'].invalid && (regFrm.controls['lname'].dirty || regFrm.controls['lname'].touched)">
+                                                <div style="color: red;"
+                                                    *ngIf="regFrm.controls['lname'].hasError('required')">
+                                                    Please Provide Last Name.!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"><b>Email<sup style="color: red;">*</sup>
+                                                :</b></label>
+                                        <input type="email" class="form-control" placeholder="Please Enter Email ID"
+                                            name="Email" formControlName="email" id="email" required>
+                                        <div
+                                            *ngIf="regFrm.controls['email'].invalid && (regFrm.controls['email'].dirty || regFrm.controls['email'].touched)">
+                                            <div style="color: red;"
+                                                *ngIf="regFrm.controls['email'].hasError('required')">
+                                                Please Provide Email ID.!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone"><b>Phone<sup style="color: red;">*</sup>
+                                                :</b></label>
+                                        <input type="number" class="form-control"
+                                            placeholder="Please Enter Phone Number" name="Phone" formControlName="mno"
+                                            id="phone" required>
+                                        <div
+                                            *ngIf="regFrm.controls['mno'].invalid && (regFrm.controls['mno'].dirty || regFrm.controls['mno'].touched)">
+                                            <div style="color: red;"
+                                                *ngIf="regFrm.controls['mno'].hasError('required')">
+                                                Please Provide Mobile Number.!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uname"><b>User Name<sup style="color: red;">*</sup>
+                                                :</b></label>
+                                        <input type="text" class="form-control" placeholder="Please Enter User Name"
+                                            name="User Name" formControlName="uname" id="uname" required>
+                                        <div
+                                            *ngIf="regFrm.controls['uname'].invalid && (regFrm.controls['uname'].dirty || regFrm.controls['uname'].touched)">
+                                            <div style="color: red;"
+                                                *ngIf="regFrm.controls['uname'].hasError('required')">
+                                                Please Provide User Name.!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-outline-primary"
+                                            style="font-size: medium; letter-spacing: 0.3mm;" id="Register"
+                                            data-toggle="modal" data-target="#Added"
+                                            [disabled]="!regFrm.valid">Register</button>
+
+                                        <button type="button" (click)="clear()" class="btn btn-outline-danger ml-2"
+                                            style="font-size: medium; letter-spacing: 0.3mm;" data-dismiss="modal"
+                                            id="close">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="userfrm col-lg-7 col-md-12 ">
+            <div class="form-inline ">
+                <form class="w-100" [formGroup]="searchFrm" (ngSubmit)="onSearch()">
+                    <div class="form-group d-flex justify-content-start">
+                        <label for="userName" class="ml-2 text-left" style="font-size: 20px;"><strong>User Name :
+                            </strong></label>
+                        <input type="text" name="UserName" class="form-control w-auto ml-2" style="font-size: 20px;"
+                            placeholder="Please Enter User Name" formControlName="search" id="userName"
+                            [matAutocomplete]="auto" (input)="InputField(searchFrm.value)">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of options" [value]="option.user_name">
+                                {{option.user_name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="m-2">
+                            <button type="submit" class="btn ml-2 btn-sm btn-outline-primary"
+                                style="font-size: 18px; letter-spacing: 0.3mm;"><strong>Get Details</strong></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="cup d-flex justify-content-around align-items-center col-lg-3 col-md-12 ">
+            <button class="btn btn-sm btn-outline-info" [routerLink]="'/change-user-pwd'"
+                ><strong>Change User Password</strong></button>
+            <a class="text-success ml-2" style="cursor: pointer;"><strong>Download Xl</strong>
+                <lucide-icon name="arrow-big-down-dash" class="mb-1" [strokeWidth]="2.5"
+                    [absoluteStrokeWidth]="true"></lucide-icon></a>
+        </div>
+    </div>
+
+
+    <!-- Model of Added Sucessfully -->
+    <div>
+        <!-- The Modal -->
+        <div class="modal fade" id="Added">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content bg-light">
+
+                    <!-- Modal Header -->
+                    <!-- <div class="modal-header">
+<h4 class="modal-title">Modal Heading</h4>
+</div> -->
+
+                    <!-- Modal body -->
+                    <div class="modal-body  d-flex justify-content-center">
+                        <button type="button" class="close" id="cancel" data-dismiss="modal"></button>
+                        <h1>User Added Successfully...!</h1>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <!-- <div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div> -->
+
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+
+
+
+    </div>
+
+    <!-- Table  -->
+    <div class="mt-4 table-responsive-sm">
+        <table class="table table-bordered">
+            <thead class="bg-light text-center" style="letter-spacing: 0.3mm; font-size: 20px;">
+                <tr>
+                    <th>User Name</th>
+                    <th>IS RCS</th>
+                    <th>Used RCS Euro</th>
+                    <th>Available RCS Euro</th>
+                    <th>Mask Reports</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!datashow" style="font-size: 20px;font-weight: 500;">
+                <tr class="text-secondary bg-light">
+                    <td colspan="1"></td>
+                    <td>Total</td>
+                    <td>0</td>
+                    <td>Total</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="datashow" style="font-size: 20px;font-weight: 500;">
+                <tr *ngFor="let item of data">
+                    <td>{{item.user_name}}</td>
+                    <td>{{item.lIsRCS}}</td>
+                    <td>{{item.RCScredits}}</td>
+                    <td>{{item.no_of_rcs_wallet}}</td>
+                    <td>
+                        <span class="d-flex justify-content-center align-items-center">
+                            <span class="container1 mr-2">
+                                <input type="checkbox" [checked]="item.mask_reports==0?false:true" (change)="changeVal($event)"
+                                    class="checkbox" id="checkbox">
+                                <label class="switch" for="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </span>
+                            <span *ngIf="item.mask_reports === 0">NO</span>
+                            <span *ngIf="item.mask_reports === 1">YES</span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

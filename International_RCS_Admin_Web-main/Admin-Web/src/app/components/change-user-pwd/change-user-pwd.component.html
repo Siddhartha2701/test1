@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center mt-5 ">
+    <div class="w-50 border boxx" style="border-radius: 30px;">
+        <form [formGroup]="changeUserPwd" class="p-3" (ngSubmit)="submit()">
+            <div class="pt-3 pb-3 pl-5 pr-5">
+                <div class="form-group">
+                    <label for="userNameCpwd" class="ml-2" style="font-size: medium;"><b>User
+                            Name </b></label>
+                    <input type="text" name="UserName_changePWD" class="form-control "
+                        placeholder="Please Enter UserName" formControlName="search" id="userNameCpwd"
+                        [matAutocomplete]="auto" (input)="InputField(changeUserPwd.value)">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of options" [value]="option.user_name">
+                            {{option.user_name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="form-group">
+                    <label for="pwdCpwd" class="ml-2" style="font-size: medium;"><b>Password </b></label>
+                    <input type="password" name="Password_changePWD" class="form-control "
+                        placeholder="Please Enter New Password" formControlName="password" id="pwdCpwd">
+                </div>
+            </div>
+            <p class="text-success text-center"  style="font-size: larger;">{{dataStatus | json}}</p>
+            <hr>
+            <div class="d-flex justify-content-end mr-3">
+                <button type="submit" [disabled]="!changeUserPwd.valid" class="btn btn-sm btn-outline-primary" style="font-size: 20px; letter-spacing: 0.3mm;"><strong>Change Password</strong></button>
+            </div>
+        </form>
+    </div>
+</div>

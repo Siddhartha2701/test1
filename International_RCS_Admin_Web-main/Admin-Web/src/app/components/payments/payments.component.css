@@ -1,0 +1,94 @@
+.tbl {
+    padding: 5px;
+}
+
+
+.form-control{
+    width: 100%;
+    font-size: 20px;
+}
+
+
+.form-control::-webkit-outer-spin-button,
+.form-control::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+mat-error{
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    /* font-style: italic; */
+}
+
+.fc1{
+    width: 50%;
+    font-size: 20px;
+}
+
+.form-group{
+    width: 100%;
+}
+
+
+@media screen and (max-width : 767px) {
+  
+    .tbl {
+        width: 100%;
+        display: block !important;
+        flex-wrap: nowrap;
+        margin: 10px 0;
+    }
+    
+    .tbl th{
+        /* flex-direction: column; */
+        /* align-content: stretch; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        display: block;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .tbl th button {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .tbl th .srch{
+        width: 100%;
+        display: block;
+    }
+
+    .tbl th .srch .form-inline .d-flex{
+        width: 100%;
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin: 10px 0;
+    }
+
+    .form-group{
+        width: 100%;
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+
+    .form-group label {
+        margin-left: 15px;
+    }
+    .form-control{
+        width: 100%;
+    }
+
+    .form-group .bbtn{
+        margin-top: 15px;
+    }
+
+
+}

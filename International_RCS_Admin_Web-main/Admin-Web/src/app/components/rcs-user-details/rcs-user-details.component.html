@@ -1,0 +1,147 @@
+<div>
+    <div class="mt-5 p-1">
+        <form action="#" class="ml-auto mr-auto w-75" [formGroup]="searchFrm">
+            <div class="input-group mb-3 ">
+                <div class="w-75">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>User Name</mat-label>
+                        <input matInput placeholder="Enter User Name" [matAutocomplete]="auto"
+                            (input)="InputField(searchFrm.value)" name="UserName" id="uName" formControlName="search">
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of options" [value]="option.user_name">
+                            {{option.user_name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="input-group-append pt-1 ml-2">
+                    <button mat-raised-button color="primary" [disabled]="!searchFrm.valid" class="button"
+                        (click)="getDetails()">Get Details</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="dtl mr-auto ml-auto">
+        <form action="#" [formGroup]="frm2" class="frm p-3 rounded ">
+            <div class="row d-flex mt-2 pt-3 justify-content-center ">
+                <div class="form-group col-lg-6 text-white  col-md-12 col-sm-12 ">
+                    <!-- <label for="uName"><b>User Name</b></label>
+                    <input class="shadow-sm form-control" formControlName="pUN" type="text" placeholder="Username"
+                        id="uName" name="User Name"> -->
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="pUN" type="text" placeholder="Username" id="username"
+                            name="User Name">
+                        <mat-error *ngIf="frm2.controls['pUN'].hasError('required')">
+                            User Name <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Client ID</mat-label>
+                        <input matInput formControlName="pClientID" type="text" placeholder="Client ID" id="clientID"
+                            name="Client ID">
+                        <mat-error *ngIf="frm2.controls['pClientID'].hasError('required')">
+                            Client ID <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <label for="clientID"><b>Client ID</b></label>
+                    <input class="shadow-sm form-control" formControlName="pClientID" type="text"
+                        placeholder="Client ID" id="clientID" name="Client ID"> -->
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Client Secret</mat-label>
+                        <input matInput formControlName="pClientSecret" placeholder="Client Secret" id="cSecret"
+                            name="Client Secret">
+                        <mat-error *ngIf="frm2.controls['pClientID'].hasError('required')">
+                            Client Secret <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <label for="cSecret"><b>Client Secret</b></label>
+                    <input class="shadow-sm form-control" type="text" formControlName="pClientSecret"
+                        placeholder="Client Secret" id="cSecret" name="Client Secret"> -->
+                </div>
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Business ID</mat-label>
+                        <input matInput formControlName="pBusinessID" placeholder="Business ID" id="bID"
+                            name="Business ID">
+                        <mat-error *ngIf="frm2.controls['pClientID'].hasError('required')">
+                            Business ID <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <label for="bID"><b>Business ID</b></label>
+                    <input class=" shadow-sm form-control" type="text" formControlName="pBusinessID"
+                        placeholder="Business ID" id="bID" name="Business ID"> -->
+                </div>
+            </div>
+            <div class="d-flex justify-content-center ">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!frm2.valid" (click)="save()"
+                    class="" style="border-radius: 50px; width: 20%;padding: 20px; font-size: 20px;">Save</button>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="border mt-4 p-3 table-responsive-sm">
+        <table class="table table-hover ">
+            <thead class="bg-light" style="letter-spacing: 0.3mm; font-size: 20px;">
+                <tr>
+                    <th>Client Id</th>
+                    <th>Client Secret</th>
+                    <th>Business Id</th>
+                    <th>Date</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data" style="letter-spacing: 0.3mm; font-size: 20px;font-weight: 500;">
+                <tr *ngFor="let item of data">
+                    <td>{{item.client_id}}</td>
+                    <td>{{item.client_secret}}</td>
+                    <td>{{item.business_id}}</td>
+                    <td>{{item.inserted_timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td class="d-flex justify-content-center" (click)="removePermision(item.id)"
+                        style="cursor: pointer;">
+                        <lucide-icon name="trash-2" data-toggle="modal" data-target="#myModal" [size]="28"
+                            color="#ff0000" [strokeWidth]="3" [absoluteStrokeWidth]="true"></lucide-icon>
+                    </td>
+                </tr>
+
+            </tbody>
+            <tbody *ngIf="!data" style="letter-spacing: 0.3mm; font-size: 20px;">
+                <tr class="text-secondary">
+                    <td colspan="5">No DLT templete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog  modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="pt-3 pl-4 pr-4 pb-0">
+                    <h1>Are You sure you want to remove this <span style="font-weight: bold;">{{name1}}</span> ?</h1>
+                </div>
+                <mat-divider style="border-width: 2px; border-color: rgb(190, 190, 190);"></mat-divider>
+                <div class="d-flex justify-content-end pt-2 pl-4 pr-4 pb-3">
+                    <button mat-raised-button color="warn"
+                        style="font-size: larger; padding: 20px; border-radius: 10px;"
+                        (click)="delete()">Delete</button>
+                    <!-- <button type="button" class="btn btn-outline-danger" (click)="delete()">Delete</button> -->
+                    <!-- <button type="button" id="cancel" class="btn btn-outline-secondary ml-2"
+                                data-dismiss="modal">Cancel</button> -->
+                    <button mat-raised-button type="button"
+                        style="font-size: larger;padding:20px ; border-radius: 10px;  background-color: whitesmoke;"
+                        id="cancel" class="ml-2" data-dismiss="modal">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

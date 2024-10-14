@@ -1,0 +1,81 @@
+.example-form {
+    min-width: 150px;
+    /* max-width: 500px; */
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+mat-form-field mat-label {
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 0.3mm;
+    padding: 0 7px;
+}
+
+.srch{
+    width: 75%;
+}
+.input-group{
+    margin-left: auto;
+    margin-right: auto;
+}
+.button{
+    font-size: 1.2rem; 
+    padding: 24px 20px;
+    border-radius: 10px;
+}
+
+mat-form-field .inp{
+    font-size: 20px;
+}
+
+mat-error{
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    /* font-style: italic; */
+}
+
+.card{
+    width: 60%;
+}
+.border{
+    border-radius: 15px;
+}
+
+.table tr td,.table tr th{
+    border-right: 1px solid lightgray;
+}
+.table tr td:nth-last-child(1),.table tr th:nth-last-child(1){
+    border-right:0;
+}
+
+.main{
+    padding: 15px;
+}
+
+@media screen and (max-width : 767px) {
+    
+    .card{
+        width: 90%;
+        margin: auto;
+    }
+    .srch{
+        width: 100%;
+    }
+    .input-group{
+        width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .main{
+        padding: 5px 5px 15px 5px;
+    }
+
+}
